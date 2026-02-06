@@ -1,0 +1,14 @@
+{
+	"reporter": [
+		"text",
+		"html",
+		"lcov"
+	],
+	"exclude": [
+		"node_modules/**",
+		"**/test/**",
+		"**/*.test.js",
+		"**/*.spec.js"
+	],
+	"all": true
+}
