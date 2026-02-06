@@ -1,8 +1,4 @@
-export function isConstructor(value) {
-	if (typeof value !== 'function') {
-		return false;
-	}
-
+export function isExtensable(value) {
 	try {
 		void class extends value{};
 
@@ -12,6 +8,6 @@ export function isConstructor(value) {
 	}
 }
 
-export function isNotNullConstructor(value) {
-	return value !== null && isConstructor(value);
+export function isConstructor(value) {
+	return typeof value === 'function' && isExtensable(value);
 }

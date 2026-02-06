@@ -1,99 +1,95 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert';
-import { isConstructor, isNotNullConstructor } from '../src/index.mjs';
+import { isConstructor, isExtensable } from '../src/index.mjs';
+
+// Define test classes and functions
+class MyClass {}
+function MyFunction() {}
+
+// Shared test fixtures
+const constructors = [
+	{ name: 'class', value: MyClass },
+	{ name: 'regular function', value: MyFunction },
+	{ name: 'Object', value: Object },
+	{ name: 'Array', value: Array },
+	{ name: 'String', value: String },
+	{ name: 'Number', value: Number },
+	{ name: 'Date', value: Date },
+];
+
+const nonConstructorFunctions = [
+	{ name: 'arrow function', value: () => {} },
+	{ name: 'async function', value: async function () {} },
+	{ name: 'generator function', value: function* () {} },
+	{ name: 'async generator function', value: async function* () {} },
+];
+
+const nonFunctionValues = [
+	{ name: 'undefined', value: undefined },
+	{ name: 'number', value: 123 },
+	{ name: 'string', value: 'string' },
+	{ name: 'plain object', value: {} },
+	{ name: 'array literal', value: [] },
+];
+
+/**
+ * Helper function to run parameterized tests
+ */
+function testCases(testName, fn, fixtures) {
+	for (const fixture of fixtures) {
+		it(`${testName} - ${fixture.name}`, () => {
+			fn(fixture.value);
+		});
+	}
+}
 
 describe('isConstructor', () => {
-	it('should return true for class', () => {
-		class MyClass {}
-		assert.strictEqual(isConstructor(MyClass), true);
+	describe('✓ valid constructors', () => {
+		testCases(
+			'should return true for',
+			(value) => {
+				assert.strictEqual(isConstructor(value), true);
+			},
+			constructors,
+		);
 	});
 
-	it('should return true for function', () => {
-		function MyFunction() {}
-		assert.strictEqual(isConstructor(MyFunction), true);
-	});
-
-	it('should return true for built-in constructors', () => {
-		assert.strictEqual(isConstructor(Object), true);
-		assert.strictEqual(isConstructor(Array), true);
-		assert.strictEqual(isConstructor(String), true);
-		assert.strictEqual(isConstructor(Number), true);
-		assert.strictEqual(isConstructor(Date), true);
-	});
-
-	it('should return false for arrow functions', () => {
-		const arrowFunc = () => {};
-		assert.strictEqual(isConstructor(arrowFunc), false);
-	});
-
-	it('should return false for async functions', () => {
-		async function asyncFunc() {}
-		assert.strictEqual(isConstructor(asyncFunc), false);
-	});
-
-	it('should return false for generator functions', () => {
-		function* generatorFunc() {}
-		assert.strictEqual(isConstructor(generatorFunc), false);
-	});
-
-	it('should return false for async generator functions', () => {
-		async function* asyncGeneratorFunc() {}
-		assert.strictEqual(isConstructor(asyncGeneratorFunc), false);
-	});
-
-	it('should return false for non-functions', () => {
-		assert.strictEqual(isConstructor(null), false);
-		assert.strictEqual(isConstructor(undefined), false);
-		assert.strictEqual(isConstructor(123), false);
-		assert.strictEqual(isConstructor('string'), false);
-		assert.strictEqual(isConstructor({}), false);
-		assert.strictEqual(isConstructor([]), false);
+	describe('✗ invalid constructors', () => {
+		testCases(
+			'should return false for',
+			(value) => {
+				assert.strictEqual(isConstructor(value), false);
+			},
+			[
+				...nonConstructorFunctions,
+				{ name: 'null', value: null },
+				...nonFunctionValues,
+			],
+		);
 	});
 });
 
-describe('isNotNullConstructor', () => {
-	it('should return true for class', () => {
-		class MyClass {}
-		assert.strictEqual(isNotNullConstructor(MyClass), true);
+describe('isExtensable', () => {
+	describe('✓ extensible values', () => {
+		testCases(
+			'should return true for',
+			(value) => {
+				assert.strictEqual(isExtensable(value), true);
+			},
+			[
+				...constructors,
+				{ name: 'null (special case)', value: null },
+			],
+		);
 	});
 
-	it('should return true for function', () => {
-		function MyFunction() {}
-		assert.strictEqual(isNotNullConstructor(MyFunction), true);
-	});
-
-	it('should return false for null', () => {
-		assert.strictEqual(isNotNullConstructor(null), false);
-	});
-
-	it('should return false for undefined', () => {
-		assert.strictEqual(isNotNullConstructor(undefined), false);
-	});
-
-	it('should return false for arrow functions', () => {
-		const arrowFunc = () => {};
-		assert.strictEqual(isNotNullConstructor(arrowFunc), false);
-	});
-
-	it('should return false for async functions', () => {
-		async function asyncFunc() {}
-		assert.strictEqual(isNotNullConstructor(asyncFunc), false);
-	});
-
-	it('should return false for generator functions', () => {
-		function* generatorFunc() {}
-		assert.strictEqual(isNotNullConstructor(generatorFunc), false);
-	});
-
-	it('should return false for async generator functions', () => {
-		async function* asyncGeneratorFunc() {}
-		assert.strictEqual(isNotNullConstructor(asyncGeneratorFunc), false);
-	});
-
-	it('should return false for non-constructors', () => {
-		assert.strictEqual(isNotNullConstructor(123), false);
-		assert.strictEqual(isNotNullConstructor('string'), false);
-		assert.strictEqual(isNotNullConstructor({}), false);
-		assert.strictEqual(isNotNullConstructor([]), false);
+	describe('✗ non-extensible values', () => {
+		testCases(
+			'should return false for',
+			(value) => {
+				assert.strictEqual(isExtensable(value), false);
+			},
+			[...nonFunctionValues, ...nonConstructorFunctions],
+		);
 	});
 });

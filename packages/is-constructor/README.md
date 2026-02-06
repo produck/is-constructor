@@ -10,6 +10,33 @@ npm install @produck/is-constructor
 
 ## Usage
 
+### `isExtensable(value)`
+
+Check if a value can be extended as a class base.
+
+```javascript
+import { isExtensable } from "@produck/is-constructor";
+
+// Classes and functions
+class MyClass {}
+isExtensable(MyClass); // true
+
+function MyFunction() {}
+isExtensable(MyFunction); // true
+
+// Built-in constructors
+isExtensable(Object); // true
+isExtensable(Array); // true
+
+// Special case: null can be extended
+isExtensable(null); // true
+
+// Non-extensible values
+isExtensable(undefined); // false
+isExtensable(42); // false
+isExtensable("string"); // false
+```
+
 ### `isConstructor(value)`
 
 Check if a value is a constructor function.
@@ -54,24 +81,21 @@ isConstructor("string"); // false
 isConstructor({}); // false
 ```
 
-### `isNotNullConstructor(value)`
-
-Check if a value is a constructor and not null/undefined.
-
-```javascript
-import { isNotNullConstructor } from "@produck/is-constructor";
-
-class MyClass {}
-isNotNullConstructor(MyClass); // true
-
-isNotNullConstructor(null); // false
-isNotNullConstructor(undefined); // false
-
-const arrowFunc = () => {};
-isNotNullConstructor(arrowFunc); // false
-```
-
 ## API
+
+### `isExtensable(value: unknown): boolean`
+
+Determines whether the given value can be extended as a class base.
+
+**Parameters:**
+
+- `value` - Any JavaScript value to test
+
+**Returns:**
+
+- `true` if the value can be used as a base in a class extends
+  clause
+- `false` otherwise
 
 ### `isConstructor(value: unknown): boolean`
 
@@ -83,57 +107,27 @@ Determines whether the given value can be used as a constructor.
 
 **Returns:**
 
-- `true` if the value is a constructor function (class or regular
-  function that can be called with `new`)
+- `true` if the value is a constructor function (class or
+  regular function that can be called with `new`)
 - `false` otherwise
 
-### `isNotNullConstructor(value: unknown): boolean`
+## How It Works
 
-Determines whether the given value is a constructor and not null or
-undefined.
-
-**Parameters:**
-
-- `value` - Any JavaScript value to test
-
-**Returns:**
-
-- `true` if the value is a constructor function and is not null or
-  undefined
-- `false` otherwise
-
-## Why `isNotNullConstructor`?
-
-In JavaScript, `null` can actually be extended as a class base:
+The implementation uses the technique of trying to extend the value as a
+class:
 
 ```javascript
-class MyClass extends null {}
-// This is valid JavaScript!
-```
-
-However, in practical usage, we typically don't want to treat `null` as a
-valid constructor candidate. The `isNotNullConstructor()` function
-explicitly filters out `null` and `undefined`, ensuring that only genuine
-constructor functions are considered valid for instantiation.
-
-This is especially useful when validating constructor arguments:
-
-```javascript
-function instantiate(ConstructorFn, ...args) {
-	if (isNotNullConstructor(ConstructorFn)) {
-		return new ConstructorFn(...args);
+function isExtensable(value) {
+	try {
+		void class extends value{};
+		return true;
+	} catch {
+		return false;
 	}
-
-	throw new TypeError("Expected a valid constructor, not null");
 }
-
-instantiate(null); // Throws error
-instantiate(MyClass); // Works
-instantiate(() => {}); // Throws error (arrow function)
 ```
 
-The function uses the technique of trying to extend the value as a class.
-If the extension succeeds, the value is a valid constructor. This approach:
+This approach:
 
 - ✓ Works with regular functions
 - ✓ Works with class declarations
