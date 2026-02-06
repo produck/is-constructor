@@ -1,0 +1,27 @@
+{
+	"name": "@produck/is-constructor-workspace",
+	"private": true,
+	"scripts": {
+		"deps:install": "npm -v && npm install",
+		"deps:ci-install": "npm install --include=optional",
+		"lint": "eslint .",
+		"test": "npm run test --workspaces --if-present",
+		"coverage": "c8 npm run test",
+		"publish": "npm run lint && lerna publish"
+	},
+	"workspaces": [
+		"packages/*"
+	],
+	"license": "MIT",
+	"devDependencies": {
+		"@eslint/compat": "^1.3.1",
+		"@eslint/js": "^9.32.0",
+		"@produck/eslint-rules": "^0.2.6",
+		"@types/node": "^24.1.0",
+		"c8": "^10.1.3",
+		"eslint": "^9.32.0",
+		"globals": "^16.3.0",
+		"lerna": "^8.2.3",
+		"typescript-eslint": "^8.38.0"
+	}
+}

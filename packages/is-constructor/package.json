@@ -1,0 +1,16 @@
+{
+	"name": "@produck/is-constructor",
+	"version": "0.0.1",
+	"description": "Use a modern way to check if it is a constructor.",
+	"main": "src/index.js",
+	"type": "module",
+	"scripts": {
+		"test": "echo \"No tests yet\""
+	},
+	"keywords": [
+		"constructor",
+		"is-constructor"
+	],
+	"author": "Produck",
+	"license": "MIT"
+}
