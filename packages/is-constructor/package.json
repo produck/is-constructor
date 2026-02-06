@@ -2,15 +2,26 @@
 	"name": "@produck/is-constructor",
 	"version": "0.0.1",
 	"description": "Use a modern way to check if it is a constructor.",
-	"main": "src/index.js",
-	"type": "module",
-	"scripts": {
-		"test": "echo \"No tests yet\""
+	"license": "MIT",
+	"author": "ChaosLee",
+	"publishConfig": {
+		"access": "public"
 	},
-	"keywords": [
-		"constructor",
-		"is-constructor"
+	"type": "module",
+	"main": "src/index.mjs",
+	"types": "index.d.ts",
+	"exports": {
+		".": {
+			"types": "./index.d.ts",
+			"import": "./src/index.mjs"
+		}
+	},
+	"files": [
+		"src",
+		"index.d.ts"
 	],
-	"author": "Produck",
-	"license": "MIT"
+	"scripts": {
+		"test": "node ./test/index.mjs",
+		"test:only": "node --test-only ./test/index.mjs"
+	}
 }
