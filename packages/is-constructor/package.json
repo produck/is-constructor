@@ -4,6 +4,23 @@
 	"description": "Use a modern way to check if it is a constructor.",
 	"license": "MIT",
 	"author": "ChaosLee",
+	"keywords": [
+		"constructor",
+		"is-constructor",
+		"extensable",
+		"class",
+		"typeof",
+		"check"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/produck/is-constructor.git",
+		"directory": "packages/is-constructor"
+	},
+	"bugs": {
+		"url": "https://github.com/produck/is-constructor/issues"
+	},
+	"homepage": "https://github.com/produck/is-constructor#readme",
 	"publishConfig": {
 		"access": "public"
 	},
