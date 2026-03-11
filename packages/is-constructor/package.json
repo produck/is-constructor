@@ -1,6 +1,6 @@
 {
 	"name": "@produck/is-constructor",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Use a modern way to check if it is a constructor.",
 	"license": "MIT",
 	"author": "ChaosLee",
