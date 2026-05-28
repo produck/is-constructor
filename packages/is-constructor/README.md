@@ -15,7 +15,7 @@ npm install @produck/is-constructor
 Check if a value can be extended as a class base.
 
 ```javascript
-import { isExtensable } from "@produck/is-constructor";
+import { isExtensable } from '@produck/is-constructor';
 
 // Classes and functions
 class MyClass {}
@@ -34,7 +34,7 @@ isExtensable(null); // true
 // Non-extensible values
 isExtensable(undefined); // false
 isExtensable(42); // false
-isExtensable("string"); // false
+isExtensable('string'); // false
 ```
 
 ### `isConstructor(value)`
@@ -42,7 +42,7 @@ isExtensable("string"); // false
 Check if a value is a constructor function.
 
 ```javascript
-import { isConstructor } from "@produck/is-constructor";
+import { isConstructor } from '@produck/is-constructor';
 
 // Classes
 class MyClass {}
@@ -77,7 +77,7 @@ isConstructor(asyncGeneratorFunc); // false
 isConstructor(null); // false
 isConstructor(undefined); // false
 isConstructor(42); // false
-isConstructor("string"); // false
+isConstructor('string'); // false
 isConstructor({}); // false
 ```
 
@@ -118,12 +118,12 @@ class:
 
 ```javascript
 function isExtensable(value) {
-	try {
-		void class extends value{};
-		return true;
-	} catch {
-		return false;
-	}
+  try {
+    void class extends value {};
+    return true;
+  } catch {
+    return false;
+  }
 }
 ```
 

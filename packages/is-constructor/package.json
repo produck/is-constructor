@@ -1,44 +1,48 @@
 {
-	"name": "@produck/is-constructor",
-	"version": "1.0.1",
-	"description": "Use a modern way to check if it is a constructor.",
-	"license": "MIT",
-	"author": "ChaosLee",
-	"keywords": [
-		"constructor",
-		"is-constructor",
-		"extensable",
-		"class",
-		"typeof",
-		"check"
-	],
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/produck/is-constructor.git",
-		"directory": "packages/is-constructor"
-	},
-	"bugs": {
-		"url": "https://github.com/produck/is-constructor/issues"
-	},
-	"homepage": "https://github.com/produck/is-constructor#readme",
-	"publishConfig": {
-		"access": "public"
-	},
-	"type": "module",
-	"main": "src/index.mjs",
-	"types": "index.d.ts",
-	"exports": {
-		".": {
-			"types": "./index.d.ts",
-			"import": "./src/index.mjs"
-		}
-	},
-	"files": [
-		"src",
-		"index.d.ts"
-	],
-	"scripts": {
-		"test": "node ./test/index.mjs",
-		"test:only": "node --test-only ./test/index.mjs"
-	}
+  "author": "ChaosLee",
+  "bugs": {
+    "url": "https://github.com/produck/is-constructor/issues"
+  },
+  "description": "Use a modern way to check if it is a constructor.",
+  "devDependencies": {
+    "c8": "11.0.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./src/index.mjs",
+      "types": "./index.d.ts"
+    }
+  },
+  "files": [
+    "src",
+    "index.d.ts"
+  ],
+  "homepage": "https://github.com/produck/is-constructor/tree/main/packages/is-constructor#readme",
+  "keywords": [
+    "check",
+    "class",
+    "constructor",
+    "extensable",
+    "is-constructor",
+    "typeof"
+  ],
+  "license": "MIT",
+  "main": "src/index.mjs",
+  "name": "@produck/is-constructor",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "directory": "packages/is-constructor",
+    "type": "git",
+    "url": "git+https://github.com/produck/is-constructor.git"
+  },
+  "scripts": {
+    "produck:coverage": "c8 --reporter=lcov --reporter=html --reporter=text-summary npm test",
+    "test": "node ./test/index.mjs",
+    "test:only": "node --test-only ./test/index.mjs"
+  },
+  "type": "module",
+  "types": "index.d.ts",
+  "version": "1.0.1"
 }

@@ -1,27 +1,41 @@
 {
-	"name": "@produck/is-constructor-workspace",
-	"private": true,
-	"scripts": {
-		"deps:install": "npm -v && npm install",
-		"deps:ci-install": "npm install --include=optional",
-		"lint": "eslint . --fix",
-		"test": "npm run test --workspaces --if-present",
-		"coverage": "c8 npm run test",
-		"publish": "npm run lint && lerna publish"
-	},
-	"workspaces": [
-		"packages/*"
-	],
-	"license": "MIT",
-	"devDependencies": {
-		"@eslint/compat": "^2.0.3",
-		"@eslint/js": "^10.0.1",
-		"@produck/eslint-rules": "^0.2.7",
-		"@types/node": "^25.5.0",
-		"c8": "^11.0.0",
-		"eslint": "^10.0.3",
-		"globals": "^17.4.0",
-		"lerna": "^9.0.7",
-		"typescript-eslint": "^8.57.1"
-	}
+  "devDependencies": {
+    "@eslint/compat": "^2.0.3",
+    "@eslint/config-helpers": "0.6.0",
+    "@eslint/js": "10.0.1",
+    "@eslint/json": "1.2.0",
+    "@eslint/markdown": "8.0.2",
+    "@produck/agent-toolkit": "0.10.0",
+    "@produck/eslint-rules": "0.4.1",
+    "@types/node": "^25.5.0",
+    "c8": "11.0.0",
+    "eslint": "10.4.0",
+    "globals": "17.6.0",
+    "husky": "9.1.7",
+    "lerna": "9.0.7",
+    "prettier": "3.8.3",
+    "typescript-eslint": "8.60.0"
+  },
+  "license": "MIT",
+  "name": "@produck/is-constructor-workspace",
+  "private": true,
+  "scripts": {
+    "coverage": "c8 npm run test",
+    "deps:ci-install": "npm install --include=optional",
+    "lint": "eslint . --fix",
+    "prepare": "husky",
+    "produck:baseline": "npm exec --package=@produck/agent-toolkit@latest -- agent-toolkit enforce-node-baseline --cwd . && npm run produck:install",
+    "produck:commit:check": "npm run produck:format && npm run produck:lint",
+    "produck:coverage": "c8 --config .c8rc.json npm run test --workspaces --if-present",
+    "produck:format": "prettier --write . --ignore-path .prettierignore --ignore-path .gitignore",
+    "produck:install": "npm -v && npm install",
+    "produck:lint": "eslint --fix . --max-warnings=0",
+    "produck:publish": "npm run produck:publish:check && npm run publish --",
+    "produck:publish:check": "npm run produck:install && npm run produck:coverage && npm run produck:commit:check",
+    "publish": "npm run lint && lerna publish",
+    "test": "npm run test --workspaces --if-present"
+  },
+  "workspaces": [
+    "packages/is-constructor"
+  ]
 }

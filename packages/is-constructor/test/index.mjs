@@ -1,1 +1,1 @@
-import './is-constructor.spec.mjs';
+import './is-constructor.test.mjs';

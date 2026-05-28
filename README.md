@@ -37,6 +37,7 @@ npm run coverage
 ## ESLint Configuration
 
 This project uses:
+
 - ESLint 9+ with flat config
 - @produck/eslint-rules for consistent code style
 - TypeScript ESLint for TypeScript support
@@ -49,4 +50,3 @@ This project uses c8 for code coverage reporting.
 ## License
 
 MIT
-

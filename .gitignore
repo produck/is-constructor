@@ -133,3 +133,19 @@ dist
 *.ign*
 
 .github
+
+# produck:org-baseline
+*.gen*
+publish-assets/
+
+# OS/Editor files
+.DS_Store
+Thumbs.db
+.idea/
+
+# Build output
+build/
+
+# Temporary files
+tmp/
+temp/
