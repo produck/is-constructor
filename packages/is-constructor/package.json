@@ -4,9 +4,6 @@
     "url": "https://github.com/produck/is-constructor/issues"
   },
   "description": "Use a modern way to check if it is a constructor.",
-  "devDependencies": {
-    "c8": "11.0.0"
-  },
   "exports": {
     ".": {
       "import": "./src/index.mjs",
