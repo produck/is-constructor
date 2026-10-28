@@ -1,6 +1,6 @@
 # @produck/is-constructor
 
-Use a modern way to check if it is a constructor.
+Check if a value is class-like, derivable, newable or a constructor.
 
 ## Installation
 

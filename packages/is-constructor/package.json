@@ -3,7 +3,7 @@
   "bugs": {
     "url": "https://github.com/produck/is-constructor/issues"
   },
-  "description": "Use a modern way to check if it is a constructor.",
+  "description": "Check if a value is class-like, derivable, newable or a constructor.",
   "exports": {
     ".": {
       "import": "./src/index.mjs",
@@ -16,12 +16,16 @@
   ],
   "homepage": "https://github.com/produck/is-constructor/tree/main/packages/is-constructor#readme",
   "keywords": [
-    "check",
     "class",
+    "class-like",
     "constructor",
-    "extensable",
+    "constructable",
+    "derivable",
+    "extends",
+    "heritage",
     "is-constructor",
-    "typeof"
+    "newable",
+    "prototype"
   ],
   "license": "MIT",
   "main": "src/index.mjs",
@@ -39,6 +43,7 @@
     "test": "node ./test/index.mjs",
     "test:only": "node --test-only ./test/index.mjs"
   },
+  "sideEffects": false,
   "type": "module",
   "types": "index.d.ts",
   "version": "1.1.0"
