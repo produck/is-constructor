@@ -7,12 +7,11 @@
   "exports": {
     ".": {
       "import": "./src/index.mjs",
-      "types": "./index.d.ts"
+      "types": "./src/index.d.mts"
     }
   },
   "files": [
-    "src",
-    "index.d.ts"
+    "src"
   ],
   "homepage": "https://github.com/produck/is-constructor/tree/main/packages/is-constructor#readme",
   "keywords": [
@@ -45,6 +44,6 @@
   },
   "sideEffects": false,
   "type": "module",
-  "types": "index.d.ts",
+  "types": "./src/index.d.mts",
   "version": "2.0.0"
 }
