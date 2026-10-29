@@ -152,3 +152,5 @@ temp/
 
 # produck:org-baseline
 !.github/
+
+package-lock.json
